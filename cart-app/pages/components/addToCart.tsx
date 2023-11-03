@@ -1,3 +1,7 @@
 export default function AddToCart() {
-  return <button>Add to Cart</button>;
+  return (
+    <div>
+      <button>Add to Cart</button>
+    </div>
+  );
 }
