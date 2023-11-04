@@ -82,16 +82,16 @@ export default function AddToCart() {
       )}
 
       {/* Amount Number (updates with slider)  x Price = Total Price*/}
+
       <span>
-        {quantity} x ${selectedProduct?.price ?? 0} = $
-        {quantity * (selectedProduct?.price ?? 0)}
+        {quantity} x ${selectedProduct?.price.toFixed(2) ?? "0.00"} = $
+        {(quantity * (selectedProduct?.price ?? 0)).toFixed(2)}
       </span>
 
       {/* Add to Cart Button*/}
+
       <button
-        onClick={() =>
-          selectedProduct && addToCart({ ...selectedProduct, quantity })
-        }
+        onClick={() => selectedProduct && addToCart(selectedProduct, quantity)}
         className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
       >
         Add to Cart

@@ -28,9 +28,31 @@ export function CartProvider({ children }: CartProviderProps) {
     fetchProducts();
   }, []);
 
-  const addToCart = (product: Product) => {};
+  const addToCart = (product: Product, quantity: number = 1) => {
+    setCartItems((prevItems) => {
+      const itemIndex = prevItems.findIndex((item) => item.id === product.id);
+      if (itemIndex > -1) {
+        // Copy the current cart items
+        const newCartItems = [...prevItems];
+        // Update the quantity of the existing item
+        newCartItems[itemIndex] = {
+          ...newCartItems[itemIndex],
+          quantity: (newCartItems[itemIndex].quantity || 0) + quantity,
+        };
+        return newCartItems;
+      } else {
+        // Add the new item with the initial quantity
+        return [...prevItems, { ...product, quantity: quantity }];
+      }
+    });
+  };
 
-  const removeFromCart = (productId: string) => {};
+  const removeFromCart = (productId: string) => {
+    setCartItems((prevItems) => {
+      const newCartItems = prevItems.filter((item) => item.id !== productId);
+      return newCartItems;
+    });
+  };
 
   return (
     <CartContext.Provider

@@ -9,7 +9,7 @@ export interface Product {
 
 export interface CartContextType {
   cartItems: Product[];
-  addToCart: (product: Product) => void;
+  addToCart: (product: Product, quantity: number) => void;
   removeFromCart: (productId: string) => void;
   products: Product[];
 }

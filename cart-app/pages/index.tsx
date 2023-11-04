@@ -9,7 +9,7 @@ export default function Home() {
       <div className="flex flex-col justify-center gap-8">
         {/* component with product choice , quantity slider and price */}
         <AddToCart />
-        {/* Table with all products/quantity chosen and total price */}
+        {/* Table with all products/quantity chosen , unit price and total price */}
         <ProductTable />
         {/* Clear Cart, Progress Bar (max 10) and Buy button*/}
         <Buy />

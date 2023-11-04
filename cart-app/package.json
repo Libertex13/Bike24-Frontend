@@ -9,6 +9,7 @@
     "lint": "next lint",
     "test": "jest",
     "test:addToCart": "jest __tests__/components/addToCart.test.tsx",
+    "test:productTable": "jest __tests__/components/productTable.test.tsx",
     "test:watch": "jest --watch"
   },
   "dependencies": {
