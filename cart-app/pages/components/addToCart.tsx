@@ -1,23 +1,29 @@
-import { Fragment } from "react";
+import { Fragment, useContext, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
-import products from "../../../data/products.json";
+import { CartContext } from "../../contexts/CartContext";
+import { Product } from "@/types/product";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function AddToCart() {
-  return (
-    <div className="w-full flex flex-row gap-4">
-      {/* Dropdown Menu  */}
+  const { products, addToCart } = useContext(CartContext);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [quantity, setQuantity] = useState(1);
 
+  return (
+    <div className="w-full flex flex-row gap-4 mt-12">
+      {/* Dropdown Menu  */}
       <Menu as="div" className="relative inline-block text-left ">
         {({ open }) => (
           <>
             <div>
               <Menu.Button className="inline-flex w-full justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
-                Select a product
+                {selectedProduct
+                  ? selectedProduct.productName
+                  : "Select a product"}
                 <ChevronDownIcon
                   className="-mr-1 ml-2 h-5 w-5"
                   aria-hidden="true"
@@ -38,17 +44,18 @@ export default function AddToCart() {
                   {products.map((product) => (
                     <Menu.Item key={product.id}>
                       {({ active }) => (
-                        <a
-                          href="#"
+                        <button
+                          type="button"
                           className={classNames(
                             active
                               ? "bg-gray-100 text-gray-900"
                               : "text-gray-700",
-                            "block px-4 py-2 text-sm"
+                            "block w-full text-left px-4 py-2 text-sm"
                           )}
+                          onClick={() => setSelectedProduct(product)}
                         >
                           {product.productName}
-                        </a>
+                        </button>
                       )}
                     </Menu.Item>
                   ))}
@@ -60,10 +67,33 @@ export default function AddToCart() {
       </Menu>
 
       {/* Amount slider */}
-      {/* Amount Number (updates with slider)  x Price = Total Price*/}
-      {/* Add to Cart Button*/}
 
-      <button className=" rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+      {selectedProduct && (
+        <div>
+          <input
+            type="range"
+            min="1"
+            max={selectedProduct.maxAmount}
+            value={quantity}
+            onChange={(e) => setQuantity(parseInt(e.target.value))}
+            className="slider"
+          />
+        </div>
+      )}
+
+      {/* Amount Number (updates with slider)  x Price = Total Price*/}
+      <span>
+        {quantity} x ${selectedProduct?.price ?? 0} = $
+        {quantity * (selectedProduct?.price ?? 0)}
+      </span>
+
+      {/* Add to Cart Button*/}
+      <button
+        onClick={() =>
+          selectedProduct && addToCart({ ...selectedProduct, quantity })
+        }
+        className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      >
         Add to Cart
       </button>
     </div>

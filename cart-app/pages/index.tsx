@@ -5,7 +5,7 @@ import Buy from "./components/buy";
 export default function Home() {
   return (
     <main className="p-24 h-full">
-      <h1>Bike 24 - Cart App</h1>
+      <h1 className="font-semibold">Bike 24 - Cart App</h1>
       <div className="flex flex-col justify-center gap-8">
         {/* component with product choice , quantity slider and price */}
         <AddToCart />

@@ -1,49 +1,125 @@
-import { render, screen } from "@testing-library/react";
+import React from "react";
+import { render, screen, waitFor } from "@testing-library/react";
+import { fireEvent } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
-import AddToCart from "../../pages/components/addToCart";
+import { CartProvider } from "../../contexts/CartContext";
+import AddToCart from "@/pages/components/addToCart";
 import mockProducts from "../../../data/products.json";
 
+// Mock fetch globally
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve(mockProducts),
+  })
+) as jest.Mock;
+
 describe("AddToCart", () => {
-  it("renders the dropdown button", () => {
-    render(<AddToCart />);
-    const dropdownButton = screen.getByRole("button", {
-      name: "Select a product",
-    });
-    expect(dropdownButton).toBeInTheDocument();
+  let consoleSpy: jest.SpyInstance;
+  beforeAll(() => {
+    consoleSpy = jest.spyOn(console, "error").mockImplementation(() => {});
   });
 
-  it("opens the dropdown menu when the button is clicked", async () => {
-    render(<AddToCart />);
-    const dropdownButton = screen.getByRole("button", {
-      name: "Select a product",
-    });
-    userEvent.click(dropdownButton);
-    const dropdownMenu = await screen.findByRole("menu");
-    expect(dropdownMenu).toBeVisible();
+  afterAll(() => {
+    consoleSpy.mockRestore();
   });
 
-  it("displays all the products in the dropdown", () => {
-    render(<AddToCart />);
-    const dropdownButton = screen.getByRole("button", {
-      name: "Select a product",
-    });
-    userEvent.click(dropdownButton);
-    mockProducts.forEach(async (product) => {
-      expect(await screen.findByText(product.productName)).toBeInTheDocument();
+  beforeEach(() => {
+    // Clear mock before each test
+    // Assuming global.fetch has been assigned a jest mock before this
+    (global.fetch as jest.Mock).mockClear();
+  });
+
+  it("initializes with the default state", async () => {
+    render(
+      <CartProvider>
+        <AddToCart />
+      </CartProvider>
+    );
+
+    // Use waitFor to wait for any state updates that occur when the component mounts
+    await waitFor(() => {
+      expect(screen.getByText("Select a product")).toBeInTheDocument();
     });
   });
 
-  it('should enable "Add to Cart" button when a product is selected', async () => {
-    render(<AddToCart />);
+  it("updates selectedProduct when a product is selected", async () => {
+    render(
+      <CartProvider>
+        <AddToCart />
+      </CartProvider>
+    );
+
+    // Click the dropdown to show the product list
     const dropdownButton = screen.getByRole("button", {
-      name: "Select a product",
+      name: /select a product/i,
     });
     userEvent.click(dropdownButton);
 
-    const productOption = await screen.findByText(mockProducts[0].productName);
-    userEvent.click(productOption);
+    // Wait for the product list to be populated
+    const firstProductButton = await screen.findByText(
+      mockProducts[0].productName
+    );
+    userEvent.click(firstProductButton);
 
-    const addToCartButton = screen.getByRole("button", { name: "Add to Cart" });
-    expect(addToCartButton).toBeEnabled();
+    await waitFor(() => {
+      expect(screen.getByText(mockProducts[0].productName)).toBeInTheDocument();
+    });
+  });
+
+  it("updates quantity when the slider is changed", async () => {
+    render(
+      <CartProvider>
+        <AddToCart />
+      </CartProvider>
+    );
+
+    // Select a product to make the slider visible
+    const dropdownButton = screen.getByRole("button", {
+      name: /select a product/i,
+    });
+    userEvent.click(dropdownButton);
+    const firstProductButton = await screen.findByText(
+      mockProducts[0].productName
+    );
+    userEvent.click(firstProductButton);
+
+    // Adjust the slider
+    const slider = (await screen.findByRole("slider")) as HTMLInputElement;
+    fireEvent.change(slider, { target: { value: "3" } });
+
+    await waitFor(() => {
+      expect(slider.value).toBe("3");
+    });
+  });
+
+  it("displays the correct total price when quantity is changed", async () => {
+    render(
+      <CartProvider>
+        <AddToCart />
+      </CartProvider>
+    );
+
+    // Select a product to enable the "Add to Cart" button and show price
+    const dropdownButton = screen.getByRole("button", {
+      name: /select a product/i,
+    });
+    userEvent.click(dropdownButton);
+    const firstProductButton = await screen.findByText(
+      mockProducts[0].productName
+    );
+    userEvent.click(firstProductButton);
+
+    // Change the quantity using the slider
+    const slider = (await screen.findByRole("slider")) as HTMLInputElement;
+    fireEvent.change(slider, { target: { value: "3" } });
+
+    await waitFor(() => {
+      // Check if the total price displayed is correct
+      const totalPriceElement = screen.getByText(
+        (content) => content.includes(`${3 * mockProducts[0].price}`),
+        { exact: false } // We use { exact: false } because we're looking for a part of the string, not the whole content
+      );
+      expect(totalPriceElement).toBeInTheDocument();
+    });
   });
 });
