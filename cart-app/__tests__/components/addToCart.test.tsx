@@ -3,30 +3,47 @@ import userEvent from "@testing-library/user-event";
 import AddToCart from "../../pages/components/addToCart";
 import mockProducts from "../../../data/products.json";
 
-describe("AddToCart Component", () => {
-  it("renders the add to cart button", async () => {
+describe("AddToCart", () => {
+  it("renders the dropdown button", () => {
     render(<AddToCart />);
-    expect(
-      screen.getByRole("button", { name: /add to cart/i })
-    ).toBeInTheDocument();
+    const dropdownButton = screen.getByRole("button", {
+      name: "Select a product",
+    });
+    expect(dropdownButton).toBeInTheDocument();
   });
 
-  it("renders a dropdown and can select an item", async () => {
+  it("opens the dropdown menu when the button is clicked", async () => {
     render(<AddToCart />);
+    const dropdownButton = screen.getByRole("button", {
+      name: "Select a product",
+    });
+    userEvent.click(dropdownButton);
+    const dropdownMenu = await screen.findByRole("menu");
+    expect(dropdownMenu).toBeVisible();
+  });
 
-    // Click the button to open the dropdown
-    const menuButton = screen.getByRole("button", { name: /more/i });
-    userEvent.click(menuButton);
+  it("displays all the products in the dropdown", () => {
+    render(<AddToCart />);
+    const dropdownButton = screen.getByRole("button", {
+      name: "Select a product",
+    });
+    userEvent.click(dropdownButton);
+    mockProducts.forEach(async (product) => {
+      expect(await screen.findByText(product.productName)).toBeInTheDocument();
+    });
+  });
 
-    // The list should now be present
-    const menuList = screen.getByRole("listbox");
-    expect(menuList).toBeVisible();
+  it('should enable "Add to Cart" button when a product is selected', async () => {
+    render(<AddToCart />);
+    const dropdownButton = screen.getByRole("button", {
+      name: "Select a product",
+    });
+    userEvent.click(dropdownButton);
 
-    // Assuming each product is in a "Menu.Item"
-    const productItems = screen.getAllByRole("option");
-    expect(productItems.length).toBeGreaterThan(0); // You expect at least one product
+    const productOption = await screen.findByText(mockProducts[0].productName);
+    userEvent.click(productOption);
 
-    // Click the first product
-    userEvent.click(productItems[0]);
+    const addToCartButton = screen.getByRole("button", { name: "Add to Cart" });
+    expect(addToCartButton).toBeEnabled();
   });
 });
