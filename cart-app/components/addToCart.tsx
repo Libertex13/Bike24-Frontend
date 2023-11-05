@@ -13,6 +13,18 @@ export default function AddToCart() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [quantity, setQuantity] = useState(1);
 
+  const handleAddToCart = () => {
+    if (selectedProduct) {
+      addToCart(selectedProduct, quantity);
+
+      const updatedProduct =
+        products.find((p) => p.id === selectedProduct.id) || null;
+      setSelectedProduct(updatedProduct);
+
+      setQuantity(1);
+    }
+  };
+
   return (
     <div className="w-full flex flex-row items-center justify-between mt-12 gap-4">
       {/* Dropdown Menu  */}
@@ -91,7 +103,7 @@ export default function AddToCart() {
 
       {/* Add to Cart Button */}
       <button
-        onClick={() => selectedProduct && addToCart(selectedProduct, quantity)}
+        onClick={handleAddToCart}
         className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
       >
         Add to Cart

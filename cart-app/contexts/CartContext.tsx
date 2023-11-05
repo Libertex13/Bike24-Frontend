@@ -29,6 +29,7 @@ export function CartProvider({ children }: CartProviderProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [isProductTypeLimitReached, setProductTypeLimitReached] =
     useState(false);
+  const [errorModalMessage, setErrorModalMessage] = useState("");
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -48,17 +49,32 @@ export function CartProvider({ children }: CartProviderProps) {
 
   const addToCart = (product: Product, quantity: number = 1) => {
     setCartItems((prevItems) => {
+      // Check for product type limit
       if (
         checkProductTypeLimit(prevItems) &&
         !prevItems.some((item) => item.id === product.id)
       ) {
-        // If the limit has been reached and the product isn't already in the cart
-        setProductTypeLimitReached(true); // Update state to reflect the limit has been reached
-        return prevItems; // Return the current items without adding a new product type
+        setErrorModalMessage(
+          "You can't add more than 10 unique product types!"
+        );
+        setProductTypeLimitReached(true);
+        return prevItems;
       }
 
-      // Proceed as normal if the limit hasn't been reached
-      setProductTypeLimitReached(false); // Reset the limit reached state
+      // Check for maxAmount limit
+      const existingProduct = prevItems.find((item) => item.id === product.id);
+      if (
+        existingProduct &&
+        (existingProduct.quantity || 0) + quantity > product.maxAmount
+      ) {
+        setErrorModalMessage(
+          `You can't add more than ${product.maxAmount} of this product.`
+        );
+        setProductTypeLimitReached(true);
+        return prevItems;
+      }
+
+      setProductTypeLimitReached(false);
 
       const itemIndex = prevItems.findIndex((item) => item.id === product.id);
       if (itemIndex > -1) {
@@ -90,6 +106,7 @@ export function CartProvider({ children }: CartProviderProps) {
 
   const closeModal = () => {
     setProductTypeLimitReached(false);
+    setErrorModalMessage("");
   };
 
   return (
@@ -110,7 +127,7 @@ export function CartProvider({ children }: CartProviderProps) {
         data-testid="error-modal"
         isOpen={isProductTypeLimitReached}
         close={closeModal}
-        message="You can't add more than 10 unique product types!"
+        message={errorModalMessage}
       />
     </>
   );
