@@ -1,3 +1,4 @@
+//cart-app\types\types.ts
 export interface Product {
   id: string;
   productName: string;

@@ -1,18 +1,18 @@
 // cart-app/pages/components/buy.tsx
 import { useContext } from "react";
+import { useRouter } from "next/router";
 import { CartContext } from "../contexts/CartContext";
 
 export default function Buy() {
   const { cartItems, clearCart } = useContext(CartContext);
+  const router = useRouter();
 
   const uniqueProductTypes = Array.from(
     new Set(cartItems.map((item) => item.id))
   ).length;
 
   const handleBuy = () => {
-    console.log("Implement the buy process here");
-
-    clearCart();
+    router.push("/checkout");
   };
   return (
     <div className="flex justify-between items-center p-4 border-t">
