@@ -1,6 +1,6 @@
-import AddToCart from "./components/addToCart";
-import ProductTable from "./components/productTable";
-import Buy from "./components/buy";
+import AddToCart from "../components/addToCart";
+import ProductTable from "../components/productTable";
+import Buy from "../components/buy";
 
 export default function Home() {
   return (

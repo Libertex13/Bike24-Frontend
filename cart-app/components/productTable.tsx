@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { CartContext } from "../../contexts/CartContext";
+import { CartContext } from "../contexts/CartContext";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 
 export default function ProductTable() {

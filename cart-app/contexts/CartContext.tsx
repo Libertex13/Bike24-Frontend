@@ -7,7 +7,7 @@ import {
   useCallback,
 } from "react";
 
-import { ErrorModal } from "@/pages/components/ErrorModal";
+import { ErrorModal } from "@/components/ErrorModal";
 
 const defaultState: CartContextType = {
   cartItems: [],

@@ -1,7 +1,7 @@
 import { Fragment, useContext, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
-import { CartContext } from "../../contexts/CartContext";
+import { CartContext } from "../contexts/CartContext";
 import { Product } from "@/types/types";
 
 function classNames(...classes: string[]) {
