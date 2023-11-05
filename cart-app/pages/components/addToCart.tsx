@@ -14,13 +14,13 @@ export default function AddToCart() {
   const [quantity, setQuantity] = useState(1);
 
   return (
-    <div className="w-full flex flex-row gap-4 mt-12">
+    <div className="w-full flex flex-row items-center justify-between mt-12 gap-4">
       {/* Dropdown Menu  */}
       <Menu as="div" className="relative inline-block text-left ">
         {({ open }) => (
           <>
             <div>
-              <Menu.Button className="inline-flex w-full justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
+              <Menu.Button className="inline-flex min-w-32 justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
                 {selectedProduct
                   ? selectedProduct.productName
                   : "Select a product"}
@@ -66,30 +66,30 @@ export default function AddToCart() {
         )}
       </Menu>
 
-      {/* Amount slider */}
-
-      {selectedProduct && (
-        <div>
+      {/* Amount slider and calculated price display */}
+      {selectedProduct ? (
+        <div className="flex flex-col items-center justify-center space-y-4">
+          {/* Slider */}
           <input
             type="range"
             min="1"
             max={selectedProduct.maxAmount}
             value={quantity}
             onChange={(e) => setQuantity(parseInt(e.target.value))}
-            className="slider"
+            className="slider w-full" // Make sure the slider is full width
           />
+          {/* Amount Number (updates with slider) x Price = Total Price */}
+          <span className="flex text-sm text-gray-800 justify-center">
+            {quantity} x ${selectedProduct?.price.toFixed(2) ?? "0.00"} = $
+            {(quantity * (selectedProduct?.price ?? 0)).toFixed(2)}
+          </span>
         </div>
+      ) : (
+        <div>Choose a Product</div>
       )}
+      <div className="flex-grow flex-row items-center justify-center p-15"></div>
 
-      {/* Amount Number (updates with slider)  x Price = Total Price*/}
-
-      <span>
-        {quantity} x ${selectedProduct?.price.toFixed(2) ?? "0.00"} = $
-        {(quantity * (selectedProduct?.price ?? 0)).toFixed(2)}
-      </span>
-
-      {/* Add to Cart Button*/}
-
+      {/* Add to Cart Button */}
       <button
         onClick={() => selectedProduct && addToCart(selectedProduct, quantity)}
         className="rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

@@ -3,7 +3,6 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import ProductTable from "@/pages/components/productTable";
 import { CartContext } from "../../contexts/CartContext";
 
-// Mock cart items
 const mockCartItems = [
   {
     id: "3ab4c6bc-8920-11ec-a5e9-939419c56813",
@@ -22,6 +21,7 @@ const mockCartItems = [
 ];
 
 const mockRemoveFromCart = jest.fn();
+const mockClearCart = jest.fn();
 
 type MockCartProviderProps = {
   children: ReactNode;
@@ -33,7 +33,9 @@ const MockCartProvider = ({ children }: MockCartProviderProps): JSX.Element => (
       cartItems: mockCartItems,
       addToCart: jest.fn(),
       removeFromCart: mockRemoveFromCart,
+      clearCart: mockClearCart,
       products: [],
+      isProductTypeLimitReached: false,
     }}
   >
     {children}
@@ -64,20 +66,16 @@ describe("ProductTable", () => {
     expect(tShirtPrices[0]).toBeInTheDocument();
 
     // Check if total price is calculated and rendered correctly
-    // You should find the total price element more specifically, perhaps by using a test-id or role
-    const totalPriceElement = screen.getByText("$11.94"); // Assuming there's only one total price element
+    const totalPriceElement = screen.getByText("$11.94");
     expect(totalPriceElement).toBeInTheDocument();
   });
 
   it("calls removeFromCart when the delete button is clicked", () => {
-    // Define the expected item ID based on your test setup
-    const expectedItemId = mockCartItems[0].id; // Replace with actual expected ID or setup
+    const expectedItemId = mockCartItems[0].id;
 
-    // Now use this ID to find the delete button for the first item
     const deleteButton = screen.getByTestId(`remove-item-${expectedItemId}`);
     fireEvent.click(deleteButton);
 
-    // Expect the removeFromCart method to be called with the first item's id
     expect(mockRemoveFromCart).toHaveBeenCalledWith(expectedItemId);
   });
 });

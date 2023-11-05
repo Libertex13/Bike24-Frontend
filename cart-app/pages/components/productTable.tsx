@@ -5,7 +5,6 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 export default function ProductTable() {
   const { cartItems, removeFromCart } = useContext(CartContext);
 
-  // Function to calculate the total price
   const calculateTotalPrice = () => {
     return cartItems.reduce(
       (total, item) => total + item.price * (item.quantity ?? 1),
@@ -81,8 +80,7 @@ export default function ProductTable() {
                   className="text-red-500 hover:text-red-700"
                   data-testid={`remove-item-${item.id}`}
                 >
-                  <XMarkIcon className="h-6 w-6" />{" "}
-                  {/* Adjust the height and width as needed */}
+                  <XMarkIcon className="h-6 w-6" />
                 </button>
               </td>
             </tr>

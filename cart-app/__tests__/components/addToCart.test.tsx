@@ -6,7 +6,6 @@ import { CartProvider } from "../../contexts/CartContext";
 import AddToCart from "@/pages/components/addToCart";
 import mockProducts from "../../../data/products.json";
 
-// Mock fetch globally
 global.fetch = jest.fn(() =>
   Promise.resolve({
     json: () => Promise.resolve(mockProducts),
@@ -24,8 +23,6 @@ describe("AddToCart", () => {
   });
 
   beforeEach(() => {
-    // Clear mock before each test
-    // Assuming global.fetch has been assigned a jest mock before this
     (global.fetch as jest.Mock).mockClear();
   });
 
@@ -36,7 +33,6 @@ describe("AddToCart", () => {
       </CartProvider>
     );
 
-    // Use waitFor to wait for any state updates that occur when the component mounts
     await waitFor(() => {
       expect(screen.getByText("Select a product")).toBeInTheDocument();
     });
