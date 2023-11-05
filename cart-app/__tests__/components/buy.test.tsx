@@ -1,7 +1,7 @@
 import { render, fireEvent, screen } from "@testing-library/react";
 import Buy from "@/pages/components/buy";
 import { CartContext } from "../../contexts/CartContext";
-import { Product, CartContextType } from "@/types/product";
+import { Product, CartContextType } from "@/types/types";
 
 const mockClearCart = jest.fn();
 const mockAddToCart = jest.fn();

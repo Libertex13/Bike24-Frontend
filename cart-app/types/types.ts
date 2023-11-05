@@ -1,5 +1,3 @@
-//cart-app\types\product.ts
-
 export interface Product {
   id: string;
   productName: string;
@@ -16,4 +14,10 @@ export interface CartContextType {
   clearCart: () => void;
   products: Product[];
   isProductTypeLimitReached: boolean;
+}
+
+export interface ErrorModalProps {
+  isOpen: boolean;
+  close: () => void;
+  message: string;
 }

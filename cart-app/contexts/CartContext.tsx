@@ -1,4 +1,4 @@
-import { Product, CartContextType } from "@/types/product";
+import { Product, CartContextType } from "@/types/types";
 import {
   createContext,
   useState,
