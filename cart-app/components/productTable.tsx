@@ -46,15 +46,17 @@ export default function ProductTable() {
               </th>
               <th
                 scope="col"
-                className="px-2 py-3 flex justify-center border-b  border-indigo-200 text-sm uppercase font-semibold  bg-red-300"
+                className="px-5 py-3 bg-red-100 border-b border-indigo-200  text-sm  font-semibold "
               >
-                <button
-                  type="button"
-                  onClick={clearCart}
-                  className="text-red-500 hover:text-red-700 flex justify-center uppercase "
-                >
-                  Delete All
-                </button>
+                <div className="flex justify-center">
+                  <button
+                    type="button"
+                    onClick={clearCart}
+                    className="text-red-500 hover:text-red-700  uppercase "
+                  >
+                    Delete All
+                  </button>
+                </div>
               </th>
             </tr>
           </thead>
@@ -88,15 +90,17 @@ export default function ProductTable() {
                       : item.price.toFixed(2)}
                   </p>
                 </td>
-                <td className="px-5 py-5  border-gray-200 bg-white border-b text-sm flex justify-center">
-                  <button
-                    type="button"
-                    onClick={() => removeFromCart(item.id)}
-                    className="text-red-500 hover:text-red-700 flex justify-center"
-                    data-testid={`remove-item-${item.id}`}
-                  >
-                    <XMarkIcon className="h-6 w-6" />
-                  </button>
+                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  <div className="flex justify-center">
+                    <button
+                      type="button"
+                      onClick={() => removeFromCart(item.id)}
+                      className="text-red-500 hover:text-red-700"
+                      data-testid={`remove-item-${item.id}`}
+                    >
+                      <XMarkIcon className="h-6 w-6" />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}

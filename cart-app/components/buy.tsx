@@ -23,19 +23,20 @@ export default function Buy() {
         Clear Cart
       </button>
       <div
-        className="w-56 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700"
+        className="w-56 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 m-5"
         data-testid="progress-bar"
       >
         <div
-          className="bg-blue-600 h-2.5 rounded-full"
+          className="bg-blue-600 h-2.5 rounded-full "
           style={{ width: `${(uniqueProductTypes / 10) * 100}%` }}
         ></div>
+        <p className="flex justify-center">{uniqueProductTypes}/10</p>
       </div>
       <button
         onClick={handleBuy}
         className="px-4 py-2 rounded bg-green-500 text-white hover:bg-green-700"
       >
-        Buy
+        Buy Items
       </button>
     </div>
   );
