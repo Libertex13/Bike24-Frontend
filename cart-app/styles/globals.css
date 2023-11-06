@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* This styles the scrollbar track */
+::-webkit-scrollbar {
+  width: 7px; /* width of the entire scrollbar */
+  height: 10px; /* height of the entire scrollbar */
+}
+
+/* This styles the scrollbar thumb (the draggable element) */
+::-webkit-scrollbar-thumb {
+  background-color: #9fa8da; /* lighter indigo color for the scroll thumb */
+  border-radius: 5px; /* roundness of the scroll thumb */
+  border: 2px solid #e0e7ff; /* adding a subtle border around the scroll thumb */
+}
+
+/* This styles the scrollbar thumb when it's being clicked on, hovered, or being dragged */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #b2b7ff; /* an even lighter indigo color when hovering */
+}
+
+/* This styles the scrollbar track */
+::-webkit-scrollbar-track {
+  background-color: #e0e7ff; /* a very light indigo for the track's background */
+  border-radius: 5px; /* match the thumb's border-radius */
+}
+
+/* Remove default buttons/arrow icons from the scrollbar */
+::-webkit-scrollbar-button {
+  display: none; /* this will remove the buttons */
+}

@@ -51,8 +51,8 @@ export default function AddToCart() {
               leaveFrom="transform opacity-100 scale-100"
               leaveTo="transform opacity-0 scale-95"
             >
-              <Menu.Items className="absolute z-10 mt-2 w-full max-h-60 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none overflow-auto">
-                <div className="py-1">
+              <Menu.Items className="absolute z-10 mt-2 min-w-24 max-h-60 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none overflow-auto">
+                <div className="py-1 ">
                   {products.map((product) => (
                     <Menu.Item key={product.id}>
                       {({ active }) => (
@@ -77,10 +77,9 @@ export default function AddToCart() {
           </>
         )}
       </Menu>
-
       {/* Amount slider and calculated price display */}
       {selectedProduct ? (
-        <div className="flex flex-col items-center justify-center space-y-4">
+        <div className="flex flex-col items-center space-y-2">
           {/* Slider */}
           <input
             type="range"
@@ -88,17 +87,20 @@ export default function AddToCart() {
             max={selectedProduct.maxAmount}
             value={quantity}
             onChange={(e) => setQuantity(parseInt(e.target.value))}
-            className="slider w-full" // Make sure the slider is full width
+            className="slider appearance-none w-full h-2 bg-gray-200 rounded-full focus:outline-none focus:ring focus:border-blue-300" // Customized slider with Tailwind classes
           />
           {/* Amount Number (updates with slider) x Price = Total Price */}
-          <span className="flex text-sm text-gray-800 justify-center">
+          <span className="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">
             {quantity} x ${selectedProduct?.price.toFixed(2) ?? "0.00"} = $
             {(quantity * (selectedProduct?.price ?? 0)).toFixed(2)}
           </span>
         </div>
       ) : (
-        <div>Choose a Product</div>
+        <div className="text-sm text-center text-gray-500 py-2 rounded-lg">
+          Choose a product!
+        </div>
       )}
+
       <div className="flex-grow flex-row items-center justify-center p-15"></div>
 
       {/* Add to Cart Button */}
