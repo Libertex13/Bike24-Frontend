@@ -53,11 +53,11 @@ export const ErrorModal = ({ isOpen, close, message }: ErrorModalProps) => {
           >
             &#8203;
           </span>
-          <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl relative">
+          <div className="relative my-8 inline-block w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
             {/* Close Button */}
             <button
               onClick={close}
-              className="absolute top-0 right-0 m-2 text-gray-400 hover:text-gray-600"
+              className="absolute right-0 top-0 m-2 text-gray-400 hover:text-gray-600"
             >
               <XMarkIcon className="h-6 w-6" />
             </button>
@@ -72,9 +72,9 @@ export const ErrorModal = ({ isOpen, close, message }: ErrorModalProps) => {
               <p className="text-sm text-gray-500">{message}</p>
             </div>
             {/* Progress bar */}
-            <div className="w-full bg-gray-200 rounded-full h-1.5 mt-4">
+            <div className="mt-4 h-1.5 w-full rounded-full bg-gray-200">
               <div
-                className="bg-red-200 h-1.5 rounded-full"
+                className="h-1.5 rounded-full bg-red-200"
                 style={{ width: `${progress}%` }}
               ></div>
             </div>

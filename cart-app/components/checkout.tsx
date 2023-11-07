@@ -45,20 +45,20 @@ const Checkout = ({ isOpen, closeModal }: CheckoutProps) => {
                   {/* Close button */}
                   <button
                     onClick={closeModal}
-                    className="absolute top-5 right-5 m- text-gray-400 hover:text-gray-600"
+                    className="m- absolute right-5 top-5 text-gray-400 hover:text-gray-600"
                   >
                     <XMarkIcon className="h-6 w-6" />
                   </button>
-                  <div className="container p-6 bg-white rounded-lg">
-                    <h1 className="text-3xl font-bold text-indigo-600 mb-8">
+                  <div className="container rounded-lg bg-white p-6">
+                    <h1 className="mb-8 text-3xl font-bold text-indigo-600">
                       Checkout
                     </h1>
-                    <div className="max-h-64 overflow-y-auto p-6 border border-indigo-500 rounded-md">
+                    <div className="max-h-64 overflow-y-auto rounded-md border border-indigo-500 p-6">
                       {/* Scrollable cart items */}
                       {cartItems.map((item) => (
                         <div
                           key={item.id}
-                          className="py-4 flex justify-between items-center text-gray-700"
+                          className="flex items-center justify-between py-4 text-gray-700"
                         >
                           <span className="text-lg font-medium">
                             {item.productName}{" "}
@@ -77,7 +77,7 @@ const Checkout = ({ isOpen, closeModal }: CheckoutProps) => {
                         </div>
                       )}
                     </div>
-                    <div className="mt-8 p-4 bg-indigo-100 rounded-md flex justify-between items-center">
+                    <div className="mt-8 flex items-center justify-between rounded-md bg-indigo-100 p-4">
                       <span className="text-xl font-bold text-gray-700">
                         Total:
                       </span>

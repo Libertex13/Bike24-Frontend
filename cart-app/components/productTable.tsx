@@ -8,58 +8,58 @@ export default function ProductTable() {
   const calculateTotalPrice = () => {
     return cartItems.reduce(
       (total, item) => total + item.price * (item.quantity ?? 1),
-      0
+      0,
     );
   };
 
   const EmptyCartPlaceholder = () => (
     <tr>
       <td colSpan={5} className="items-center justify-center py-10">
-        <div className="text-indigo-500 text-center ">Cart is empty</div>
+        <div className="text-center text-indigo-500 ">Cart is empty</div>
       </td>
     </tr>
   );
 
   return (
-    <div className="flex flex-col h-[500px] overflow-hidden rounded-lg border border-indigo-600">
+    <div className="flex h-[500px] flex-col overflow-hidden rounded-lg border border-indigo-600">
       {/* Table with a flex-grow to take up all available space */}
       <div className="flex-grow overflow-x-auto overflow-y-auto">
         <table className="min-w-full leading-normal" data-testid="cart-table">
-          <thead className="sticky top-0 z-7 bg-indigo-600 text-white">
+          <thead className="z-7 sticky top-0 bg-indigo-600 text-white">
             <tr>
               <th
                 scope="col"
-                className="px-5 py-3 border-b border-indigo-500 text-left text-sm font-semibold text-white uppercase tracking-wider rounded-tl-lg"
+                className="rounded-tl-lg border-b border-indigo-500 px-5 py-3 text-left text-sm font-semibold uppercase tracking-wider text-white"
               >
                 Product Name
               </th>
               <th
                 scope="col"
-                className="px-5 py-3 border-b border-indigo-500 text-left text-sm font-semibold text-white uppercase tracking-wider"
+                className="border-b border-indigo-500 px-5 py-3 text-left text-sm font-semibold uppercase tracking-wider text-white"
               >
                 Unit Price
               </th>
               <th
                 scope="col"
-                className="px-5 py-3 border-b border-indigo-500 text-left text-sm font-semibold text-white uppercase tracking-wider"
+                className="border-b border-indigo-500 px-5 py-3 text-left text-sm font-semibold uppercase tracking-wider text-white"
               >
                 Amount
               </th>
               <th
                 scope="col"
-                className="px-5 py-3 border-b border-indigo-500 text-left text-sm font-semibold text-white uppercase tracking-wider"
+                className="border-b border-indigo-500 px-5 py-3 text-left text-sm font-semibold uppercase tracking-wider text-white"
               >
                 Total Price
               </th>
               <th
                 scope="col"
-                className="px-5 py-3 border-b border-indigo-500 bg-red-400 hover:bg-red-500 text-sm font-semibold"
+                className="border-b border-indigo-500 bg-red-400 px-5 py-3 text-sm font-semibold hover:bg-red-500"
               >
                 <div className="flex justify-center">
                   <button
                     type="button"
                     onClick={clearCart}
-                    className="text-white uppercase tracking-wider"
+                    className="uppercase tracking-wider text-white"
                   >
                     Delete All
                   </button>
@@ -71,34 +71,34 @@ export default function ProductTable() {
             {cartItems.length > 0 ? (
               cartItems.map((item) => (
                 <tr key={item.id} className="hover:bg-gray-100">
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
                     <div className="flex items-center">
                       <div className="ml-3">
-                        <p className="text-gray-900 whitespace-no-wrap font-medium">
+                        <p className="whitespace-no-wrap font-medium text-gray-900">
                           {item.productName}
                         </p>
                       </div>
                     </div>
                   </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-800 whitespace-no-wrap font-medium">
+                  <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                    <p className="whitespace-no-wrap font-medium text-gray-800">
                       ${item.price}
                     </p>
                   </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-800 whitespace-no-wrap font-medium">
+                  <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                    <p className="whitespace-no-wrap font-medium text-gray-800">
                       {item.quantity} / {item.maxAmount}
                     </p>
                   </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-800 whitespace-no-wrap font-medium">
+                  <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                    <p className="whitespace-no-wrap font-medium text-gray-800">
                       $
                       {item.quantity
                         ? (item.quantity * item.price).toFixed(2)
                         : item.price.toFixed(2)}
                     </p>
                   </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
                     <div className="flex justify-center">
                       <button
                         type="button"
@@ -118,7 +118,7 @@ export default function ProductTable() {
           </tbody>
         </table>
       </div>
-      <div className="sticky bottom-0 z-5 p-5 bg-indigo-600 text-white flex justify-end">
+      <div className="z-5 sticky bottom-0 flex justify-end bg-indigo-600 p-5 text-white">
         <div>
           <span className="text-right font-semibold">Total Cart Price: </span>
           <span className="text-right font-semibold">

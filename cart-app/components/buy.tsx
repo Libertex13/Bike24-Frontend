@@ -8,7 +8,7 @@ export default function Buy() {
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
 
   const uniqueProductTypes = Array.from(
-    new Set(cartItems.map((item) => item.id))
+    new Set(cartItems.map((item) => item.id)),
   ).length;
 
   const handleBuy = () => {
@@ -21,26 +21,26 @@ export default function Buy() {
 
   return (
     <>
-      <div className="flex justify-between items-center p-4 border-t">
+      <div className="flex items-center justify-between border-t p-4">
         <button
           onClick={clearCart}
-          className="px-4 py-2 rounded bg-red-500 text-white hover:bg-red-700"
+          className="rounded bg-red-500 px-4 py-2 text-white hover:bg-red-700"
         >
           Clear Cart
         </button>
         <div
-          className="w-56 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 m-5"
+          className="m-5 h-2.5 w-56 rounded-full bg-gray-200 dark:bg-gray-700"
           data-testid="progress-bar"
         >
           <div
-            className="bg-blue-600 h-2.5 rounded-full "
+            className="h-2.5 rounded-full bg-blue-600 "
             style={{ width: `${(uniqueProductTypes / 10) * 100}%` }}
           ></div>
           <p className="flex justify-center">{uniqueProductTypes}/10</p>
         </div>
         <button
           onClick={handleBuy}
-          className="px-4 py-2 rounded bg-green-500 text-white hover:bg-green-700"
+          className="rounded bg-green-500 px-4 py-2 text-white hover:bg-green-700"
         >
           Buy Items
         </button>

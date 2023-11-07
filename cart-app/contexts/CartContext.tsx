@@ -54,7 +54,7 @@ export function CartProvider({
         !prevItems.some((item) => item.id === product.id)
       ) {
         setErrorModalMessage(
-          "You can't add more than 10 unique product types!"
+          "You can't add more than 10 unique product types!",
         );
         setProductTypeLimitReached(true);
 
@@ -68,7 +68,7 @@ export function CartProvider({
         (existingProduct.quantity || 0) + quantity > product.maxAmount
       ) {
         setErrorModalMessage(
-          `You can't add more than ${product.maxAmount} of this product.`
+          `You can't add more than ${product.maxAmount} of this product.`,
         );
         setProductTypeLimitReached(true);
         return prevItems;
