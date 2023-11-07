@@ -27,7 +27,7 @@ export interface ErrorModalProps {
 
 export interface CartProviderProps {
   children: ReactNode;
-  initialCartItems?: Product[]; // Optional prop to pre-populate the cart
+  initialCartItems?: Product[]; // Optional prop to pre-populate the cart(for the test to go faster)
 }
 
 export interface CheckoutProps {

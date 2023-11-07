@@ -59,7 +59,7 @@ describe("<Buy />", () => {
     render(
       <CartContext.Provider value={mockContextValue}>
         <Buy />
-      </CartContext.Provider>
+      </CartContext.Provider>,
     );
 
     expect(screen.getByText(/Clear Cart/i)).toBeInTheDocument();
@@ -70,7 +70,7 @@ describe("<Buy />", () => {
     render(
       <CartContext.Provider value={mockContextValue}>
         <Buy />
-      </CartContext.Provider>
+      </CartContext.Provider>,
     );
 
     fireEvent.click(screen.getByText(/Clear Cart/i));
@@ -81,7 +81,7 @@ describe("<Buy />", () => {
     render(
       <CartContext.Provider value={mockContextValue}>
         <Buy />
-      </CartContext.Provider>
+      </CartContext.Provider>,
     );
 
     // Calculate expected width based on unique product types

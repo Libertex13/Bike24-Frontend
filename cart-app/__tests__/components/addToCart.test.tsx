@@ -10,7 +10,7 @@ import mockProducts from "../../../data/products.json";
 global.fetch = jest.fn(() =>
   Promise.resolve({
     json: () => Promise.resolve(mockProducts),
-  })
+  }),
 ) as jest.Mock;
 
 describe("AddToCart", () => {
@@ -31,7 +31,7 @@ describe("AddToCart", () => {
     render(
       <CartProvider>
         <AddToCart />
-      </CartProvider>
+      </CartProvider>,
     );
 
     await waitFor(() => {
@@ -43,7 +43,7 @@ describe("AddToCart", () => {
     render(
       <CartProvider>
         <AddToCart />
-      </CartProvider>
+      </CartProvider>,
     );
 
     // Click the dropdown to show the product list
@@ -54,7 +54,7 @@ describe("AddToCart", () => {
 
     // Wait for the product list to be populated
     const firstProductButton = await screen.findByText(
-      mockProducts[0].productName
+      mockProducts[0].productName,
     );
     userEvent.click(firstProductButton);
 
@@ -67,7 +67,7 @@ describe("AddToCart", () => {
     render(
       <CartProvider>
         <AddToCart />
-      </CartProvider>
+      </CartProvider>,
     );
 
     // Select a product to make the slider visible
@@ -76,7 +76,7 @@ describe("AddToCart", () => {
     });
     userEvent.click(dropdownButton);
     const firstProductButton = await screen.findByText(
-      mockProducts[0].productName
+      mockProducts[0].productName,
     );
     userEvent.click(firstProductButton);
 
@@ -93,7 +93,7 @@ describe("AddToCart", () => {
     render(
       <CartProvider>
         <AddToCart />
-      </CartProvider>
+      </CartProvider>,
     );
 
     // Select a product to enable the "Add to Cart" button and show price
@@ -102,7 +102,7 @@ describe("AddToCart", () => {
     });
     userEvent.click(dropdownButton);
     const firstProductButton = await screen.findByText(
-      mockProducts[0].productName
+      mockProducts[0].productName,
     );
     userEvent.click(firstProductButton);
 
@@ -114,7 +114,7 @@ describe("AddToCart", () => {
       // Check if the total price displayed is correct
       const totalPriceElement = screen.getByText(
         (content) => content.includes(`${3 * mockProducts[0].price}`),
-        { exact: false } // We use { exact: false } because we're looking for a part of the string, not the whole content
+        { exact: false }, // We use { exact: false } because we're looking for a part of the string, not the whole content
       );
       expect(totalPriceElement).toBeInTheDocument();
     });

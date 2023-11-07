@@ -1,4 +1,3 @@
-//cart-app\__tests__\components\productTable.test.tsx
 import React, { ReactNode } from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import ProductTable from "@/components/productTable";
@@ -48,7 +47,7 @@ describe("ProductTable", () => {
     render(
       <MockCartProvider>
         <ProductTable />
-      </MockCartProvider>
+      </MockCartProvider>,
     );
   });
 
