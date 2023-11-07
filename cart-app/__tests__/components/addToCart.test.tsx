@@ -1,3 +1,4 @@
+//cart-app\__tests__\components\addToCart.test.tsx
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import { fireEvent } from "@testing-library/dom";

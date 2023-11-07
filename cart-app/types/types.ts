@@ -1,4 +1,6 @@
 //cart-app\types\types.ts
+import { ReactNode } from "react";
+
 export interface Product {
   id: string;
   productName: string;
@@ -21,4 +23,14 @@ export interface ErrorModalProps {
   isOpen: boolean;
   close: () => void;
   message: string;
+}
+
+export interface CartProviderProps {
+  children: ReactNode;
+  initialCartItems?: Product[]; // Optional prop to pre-populate the cart
+}
+
+export interface CheckoutProps {
+  isOpen: boolean;
+  closeModal: () => void;
 }

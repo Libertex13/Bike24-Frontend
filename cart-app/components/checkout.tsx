@@ -4,11 +4,7 @@ import { useContext, Fragment } from "react";
 import { CartContext } from "@/contexts/CartContext";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
-
-interface CheckoutProps {
-  isOpen: boolean;
-  closeModal: () => void;
-}
+import { CheckoutProps } from "@/types/types";
 
 const Checkout = ({ isOpen, closeModal }: CheckoutProps) => {
   const { cartItems } = useContext(CartContext);

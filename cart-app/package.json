@@ -11,6 +11,7 @@
     "test:addToCart": "jest __tests__/components/addToCart.test.tsx",
     "test:productTable": "jest __tests__/components/productTable.test.tsx",
     "test:buy": "jest __tests__/components/buy.test.tsx",
+    "test:integration": "jest __tests__/integration/cartIntegration.test.tsx",
     "test:watch": "jest --watch"
   },
   "dependencies": {
@@ -36,6 +37,7 @@
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8",
+    "resize-observer-polyfill": "^1.5.1",
     "tailwindcss": "^3.3.0",
     "ts-jest": "^29.1.1",
     "typescript": "^5"

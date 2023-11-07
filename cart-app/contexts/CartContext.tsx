@@ -1,4 +1,4 @@
-import { Product, CartContextType } from "@/types/types";
+import { Product, CartContextType, CartProviderProps } from "@/types/types";
 import {
   createContext,
   useState,
@@ -20,12 +20,11 @@ const defaultState: CartContextType = {
 
 export const CartContext = createContext<CartContextType>(defaultState);
 
-interface CartProviderProps {
-  children: ReactNode;
-}
-
-export function CartProvider({ children }: CartProviderProps) {
-  const [cartItems, setCartItems] = useState<Product[]>([]);
+export function CartProvider({
+  children,
+  initialCartItems = [],
+}: CartProviderProps) {
+  const [cartItems, setCartItems] = useState<Product[]>(initialCartItems);
   const [products, setProducts] = useState<Product[]>([]);
   const [isProductTypeLimitReached, setProductTypeLimitReached] =
     useState(false);
@@ -58,6 +57,7 @@ export function CartProvider({ children }: CartProviderProps) {
           "You can't add more than 10 unique product types!"
         );
         setProductTypeLimitReached(true);
+
         return prevItems;
       }
 
@@ -124,7 +124,6 @@ export function CartProvider({ children }: CartProviderProps) {
         {children}
       </CartContext.Provider>
       <ErrorModal
-        data-testid="error-modal"
         isOpen={isProductTypeLimitReached}
         close={closeModal}
         message={errorModalMessage}

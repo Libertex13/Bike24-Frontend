@@ -24,7 +24,7 @@ export default function ProductTable() {
     <div className="flex flex-col h-[500px] overflow-hidden rounded-lg border border-indigo-600">
       {/* Table with a flex-grow to take up all available space */}
       <div className="flex-grow overflow-x-auto overflow-y-auto">
-        <table className="min-w-full leading-normal">
+        <table className="min-w-full leading-normal" data-testid="cart-table">
           <thead className="sticky top-0 z-7 bg-indigo-600 text-white">
             <tr>
               <th
@@ -87,7 +87,7 @@ export default function ProductTable() {
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-800 whitespace-no-wrap font-medium">
-                      {item.quantity}
+                      {item.quantity} / {item.maxAmount}
                     </p>
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">

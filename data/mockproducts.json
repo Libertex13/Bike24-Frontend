@@ -1,0 +1,93 @@
+[
+  {
+    "id": "3ab4c6bc-8920-11ec-a5e9-939419c56813",
+    "productName": "Cup",
+    "maxAmount": 100,
+    "taxRate": 19,
+    "price": 1.99
+  },
+  {
+    "id": "2fdc8b4e-8920-11ec-aadd-cbe09129765b",
+    "productName": "T-Shirt",
+    "maxAmount": 2,
+    "taxRate": 19,
+    "price": 9.95
+  },
+  {
+    "id": "207dcb54-8920-11ec-876b-2346543311ec",
+    "productName": "Bike",
+    "maxAmount": 12,
+    "taxRate": 19,
+    "price": 999
+  },
+  {
+    "id": "1a2c79e4-8920-11ec-bd2d-7b195ee0d8a9",
+    "productName": "E-Bike",
+    "maxAmount": 12,
+    "taxRate": 19,
+    "price": 4999.95
+  },
+  {
+    "id": "1e8d3093-9e5c-455e-9343-4cb90a00192b",
+    "productName": "Mustard - Dry, Powder",
+    "maxAmount": 35,
+    "taxRate": 7,
+    "price": 18.96
+  },
+  {
+    "id": "f514dd81-770c-4e15-8454-ba3472c4087b",
+    "productName": "Appetizer - Asian Shrimp Roll",
+    "maxAmount": 98,
+    "taxRate": 7,
+    "price": 13.29
+  },
+  {
+    "id": "e2c29386-b784-4855-bffb-8ffb759e1ca9",
+    "productName": "Squid - Tubes / Tenticles 10/20",
+    "maxAmount": 87,
+    "taxRate": 7,
+    "price": 1.65
+  },
+  {
+    "id": "dc589264-a53c-4f9e-80f1-325fa5d7ffa2",
+    "productName": "Lettuce - Boston Bib",
+    "maxAmount": 76,
+    "taxRate": 7,
+    "price": 14.32
+  },
+  {
+    "id": "164ecc85-99e9-4494-bf51-5584699b41cf",
+    "productName": "Beer - Steamwhistle",
+    "maxAmount": 76,
+    "taxRate": 7,
+    "price": 8.18
+  },
+  {
+    "id": "4ccaeaaa-c162-486e-9137-f880f906d436",
+    "productName": "Otomegusa Dashi Konbu",
+    "maxAmount": 25,
+    "taxRate": 7,
+    "price": 8.13
+  },
+  {
+    "id": "03c2e980-3485-4f09-be27-6c4ae9217471",
+    "productName": "Salmon - Smoked, Sliced",
+    "maxAmount": 50,
+    "taxRate": 7,
+    "price": 19.39
+  },
+  {
+    "id": "1ab3aad1-dc0e-4e34-b080-81056911cd41",
+    "productName": "Bread Crumbs - Japanese Style",
+    "maxAmount": 9,
+    "taxRate": 7,
+    "price": 17.75
+  },
+  {
+    "id": "4bce0dad-3efc-4617-8f30-b81e4b91a801",
+    "productName": "Cheese - Valancey",
+    "maxAmount": 27,
+    "taxRate": 7,
+    "price": 9.63
+  }
+]

@@ -37,7 +37,7 @@ export const ErrorModal = ({ isOpen, close, message }: ErrorModalProps) => {
   }, [isOpen, close]);
 
   return (
-    <div>
+    <div data-testid="error-modal">
       <Dialog
         as="div"
         className="fixed inset-0 z-10 overflow-y-auto"
