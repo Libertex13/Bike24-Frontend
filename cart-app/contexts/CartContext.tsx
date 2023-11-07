@@ -1,11 +1,5 @@
 import { Product, CartContextType, CartProviderProps } from "@/types/types";
-import {
-  createContext,
-  useState,
-  useEffect,
-  ReactNode,
-  useCallback,
-} from "react";
+import { createContext, useState, useEffect, useCallback } from "react";
 
 import { ErrorModal } from "@/components/ErrorModal";
 
