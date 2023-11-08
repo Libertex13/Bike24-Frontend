@@ -1,5 +1,5 @@
 import { render, fireEvent, screen } from "@testing-library/react";
-import Buy from "@/components/buy";
+import Buy from "@/components/Buy";
 import { CartContext } from "../../contexts/CartContext";
 import { Product, CartContextType } from "@/types/types";
 
