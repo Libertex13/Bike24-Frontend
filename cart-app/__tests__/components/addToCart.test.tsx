@@ -4,7 +4,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { fireEvent } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
 import { CartProvider } from "../../contexts/CartContext";
-import AddToCart from "@/components/addToCart";
+import AddToCart from "@/components/AddToCart";
 import mockProducts from "../../../data/products.json";
 
 global.fetch = jest.fn(() =>

@@ -1,4 +1,4 @@
-import AddToCart from "@/components/addToCart";
+import AddToCart from "@/components/AddToCart";
 import ProductTable from "../components/ProductTable";
 import Buy from "../components/Buy";
 
