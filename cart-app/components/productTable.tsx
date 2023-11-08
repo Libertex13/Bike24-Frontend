@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { CartContext } from "../contexts/CartContext";
 import { XMarkIcon } from "@heroicons/react/24/solid";
+import { Product } from "@/types/types";
 
 export default function ProductTable() {
-  const { cartItems, removeFromCart, clearCart } = useContext(CartContext);
+  const { cartItems, removeFromCart, addToCart, clearCart } =
+    useContext(CartContext);
 
   const calculateTotalPrice = () => {
     return cartItems.reduce(
@@ -19,6 +21,20 @@ export default function ProductTable() {
       </td>
     </tr>
   );
+
+  const increaseQuantity = (product: Product) => {
+    addToCart(product, 1);
+  };
+
+  const decreaseQuantity = (product: Product) => {
+    // If the quantity is 1, removing it from the cart
+    if (product.quantity === 1) {
+      removeFromCart(product.id);
+    } else {
+      // Otherwise, decrease the quantity by 1
+      addToCart(product, -1);
+    }
+  };
 
   return (
     <div className="flex h-[500px] flex-col overflow-hidden rounded-lg border border-indigo-600">
@@ -61,17 +77,17 @@ export default function ProductTable() {
                     onClick={clearCart}
                     className="uppercase tracking-wider text-white"
                   >
-                    Delete All
+                    Clear Cart
                   </button>
                 </div>
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="">
             {cartItems.length > 0 ? (
               cartItems.map((item) => (
                 <tr key={item.id} className="hover:bg-gray-100">
-                  <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                  <td className="border-b border-gray-200 bg-white px-5 py-5 ">
                     <div className="flex items-center">
                       <div className="ml-3">
                         <p className="whitespace-no-wrap font-medium text-gray-900">
@@ -80,17 +96,33 @@ export default function ProductTable() {
                       </div>
                     </div>
                   </td>
-                  <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                  <td className="border-b border-gray-200 bg-white px-5 py-5 ">
                     <p className="whitespace-no-wrap font-medium text-gray-800">
                       ${item.price}
                     </p>
                   </td>
-                  <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                    <p className="whitespace-no-wrap font-medium text-gray-800">
-                      {item.quantity} / {item.maxAmount}
-                    </p>
+                  <td className=" gap-2 border-b border-gray-200 bg-white px-5 py-5 ">
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => decreaseQuantity(item)}
+                        className="flex h-8 w-8 items-center justify-center  text-indigo-600 hover:border-indigo-800 hover:text-indigo-800  disabled:opacity-50"
+                        disabled={item.quantity === 1}
+                      >
+                        <span className="text-2xl">-</span>
+                      </button>
+                      <p className="whitespace-no-wrap font-medium text-gray-800">
+                        {item.quantity} / {item.maxAmount}
+                      </p>
+                      <button
+                        onClick={() => increaseQuantity(item)}
+                        className="flex h-8 w-8 items-center justify-center font-semibold text-indigo-600 hover:border-indigo-800 hover:text-indigo-800 disabled:opacity-50"
+                        disabled={item.quantity === item.maxAmount}
+                      >
+                        <span className="text-2xl">+</span>
+                      </button>
+                    </div>
                   </td>
-                  <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                  <td className="border-b border-gray-200 bg-white px-5 py-5 ">
                     <p className="whitespace-no-wrap font-medium text-gray-800">
                       $
                       {item.quantity
@@ -98,7 +130,7 @@ export default function ProductTable() {
                         : item.price.toFixed(2)}
                     </p>
                   </td>
-                  <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                  <td className="border-b border-gray-200 bg-white px-5 py-5 ">
                     <div className="flex justify-center">
                       <button
                         type="button"

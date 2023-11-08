@@ -1,63 +1,124 @@
-Greetings and welcome to the Bike24 Frontend challenge
+# Bike24 Frontend Challenge Readme
 
-![UI example](https://github.com/Bike24/FrontendCodingChallenge/blob/main/assets/ui_example.png?raw=true)
+## Introduction
 
-&nbsp;
-&nbsp;
+This readme provides information on how to set up and use the app, as well as important details about the implementation.
+Important details:
 
-## The rules
--   The visualisation above is just a suggestion, it's up to **you** to implement it according to **your imagination**
+- Fully mobile responsive.
+- Deployed via Vercel: bike24-frontend.vercel.app
 
--   Most parts of our frontend are written in React, so using React for your task is an advantage 
+## Table of Contents
 
--   Focus on **code quality** and **best practices**
+- [Getting Started](#getting-started)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Testing](#testing)
+- [Deployment](#deployment)
+- [Libraries](#libraries)
+- [Contributing](#contributing)
+- [License](#license)
 
--   We expect some unit- and integration-tests. Use the testing frameworks you like
+## Getting Started
 
--   Using **Typescript** is mandatory
+### Requirements
 
--   Provide your code in a github repository. We will execute it locally and may not know which node.js version you have used.
+To run the Bike24 Frontend Challenge app, you need the following:
 
--   Imagine how you would deploy such a app with a **cloud provider,** take some notes in the **Readme**
+- Node.js
+- npm (Node Package Manager)
+- Git
 
--   You can use libraries, but maybe we ask why exactly this one
+### Installation
 
--   Please **avoid** a **single commit** at the end, we are also interested in the commit history :)
+Follow these steps to set up and run the app locally:
 
-_Hint: You will find the products in the data folder_ 
+1. Clone the GitHub repository to your local machine:
 
-&nbsp;
-&nbsp;
+   ```bash
+   git clone https://github.com/Libertex13/Bike24-Frontend.git
+   ```
 
+2. Navigate to the project directory:
 
-## The task
+   ```bash
+   cd cart-app
+   ```
 
-**Try to imagine a wild :upside_down_face: product owner approaching you and wanting to improve the shopping experience for our customers. The following requirements are specified*
+3. Install the project dependencies using npm:
 
--   As a customer I want to be able to select products from the drop down list.
+   ```bash
+   npm install
+   ```
 
--   As a customer I would like to be able to determine the quantity of the product before I add it to the shopping cart.
+4. Start the development server:
 
--   As a customer I would like to be informed when I exceed the maximum number of products and be prevented from entering more than this number
+   ```bash
+   npm run dev
+   ```
 
--   As a customer I want to be able to see all my products in the shopping cart
+5. Open your web browser and access the app at [http://localhost:3000](http://localhost:3000).
 
--   As a customer I want to be able to see the unit price in my shopping cart. Optional task: there is a value "taxRate" provided - use it to calculate the gross price for each product.
+## Usage
 
--   As a customer I want to be able to see the total of the shopping cart at any time
+Here's how to use the Bike24 Frontend Challenge app:
 
--   As a customer I want to be able to remove products from the shopping cart either one by one or by all at one by pressing the "clear Cart" button.
+- Select products from the dropdown list.
+- Determine the quantity of the product using a slider.
+- Be informed when exceeding the maximum number of products.
+- View all selected products in the shopping cart.
+- See the unit price in the shopping cart .
+- View the total price of the shopping cart.
+- Remove products from the shopping cart individually or all at once using the "Clear Cart" or "Delete All" button.
+- Monitor the number of different product types that can be added using the progress bar.
+- e informed when exceeding the maximum number of product types.
+- See a graphical overlay confirmation "checkout" when confirming the purchase.
 
--   It's not allowed to add more than 10 different product types in the shopping cart. As a customer I want to be able to see a visual representation of how many product types I can still add in a progress bar on the bottom.
+## Testing
 
--   As a customer I want to see a graphical overlay when I confirm the purchase to know that my order was successful
+Unit and integration tests have been implemented to ensure code quality and functionality. To run the tests, use the following command:
 
--   It is not allowed to add a quantity of items to the shopping cart that exceeds the "**maxAmount**" of the respective product. As a customer I want to be able to select the quantity of products with a slider
- 
- 
-&nbsp;
-&nbsp;
-&nbsp;
+To run all tests (takes about 30s the first time):
 
+```bash
+npm test
+```
 
-### Good luck
+For specific tests:
+
+```bash
+npm run test:addToCart
+npm run test:productTable
+npm run test:buy
+npm run test:integration
+```
+
+## Deployment
+
+This app is already deployed at bike24-frontend.vercel.app to showcase.
+
+If it weren't deployed already, to deploy the Bike24 Frontend Challenge app with a cloud provider, it should be quite a simple task with Vercel, since it's a Next js project:
+
+- Add your repository to Vercel projects in your Dashboard, make sure you give the rigt permissions.
+- Start the first build.
+- Every push to that repository will get automatically deployed to production.
+- Deploying early is a good practice to ensure what works in the dev environment works in production also from the start.
+
+## Libraries
+
+The following libraries and technologies have been used in this project:
+
+- React: A JavaScript library for building user interfaces. React Context is used for most if the test management. Even the data fetching id done through the single CArtContext.tsx file.
+- Next JS: a React framework for full-stack apps --> decided to simulate a backend to showcase use of the api route,
+- TypeScript: A statically-typed superset of JavaScript.
+- Jest and React Testing Library for unit and integration tests.
+- Tailwind CSS for styling , with headlessUI library.
+
+## Contributing
+
+Contributions to this project are welcome. If you have improvements or bug fixes to suggest, please create a pull request.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).

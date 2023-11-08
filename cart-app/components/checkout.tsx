@@ -7,7 +7,7 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import { CheckoutProps } from "@/types/types";
 
 const Checkout = ({ isOpen, closeModal }: CheckoutProps) => {
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, clearCart } = useContext(CartContext);
 
   const totalPrice = cartItems.reduce((total, item) => {
     return total + item.price * (item.quantity ?? 1);
@@ -50,9 +50,10 @@ const Checkout = ({ isOpen, closeModal }: CheckoutProps) => {
                     <XMarkIcon className="h-6 w-6" />
                   </button>
                   <div className="container rounded-lg bg-white p-6">
-                    <h1 className="mb-8 text-3xl font-bold text-indigo-600">
-                      Checkout
+                    <h1 className="mb-4 text-3xl font-bold text-indigo-600">
+                      Checkout Confirmed!
                     </h1>
+
                     <div className="max-h-64 overflow-y-auto rounded-md border border-indigo-500 p-6">
                       {/* Scrollable cart items */}
                       {cartItems.map((item) => (
@@ -77,13 +78,24 @@ const Checkout = ({ isOpen, closeModal }: CheckoutProps) => {
                         </div>
                       )}
                     </div>
-                    <div className="mt-8 flex items-center justify-between rounded-md bg-indigo-100 p-4">
+
+                    <div className=" mt-4 flex items-center justify-between rounded-md bg-indigo-100 p-4">
                       <span className="text-xl font-bold text-gray-700">
                         Total:
                       </span>
                       <strong className="text-xl font-bold text-indigo-600">
                         ${totalPrice.toFixed(2)}
                       </strong>
+                    </div>
+                    <div className=" mb-2 mt-2 flex justify-center rounded-md bg-green-200 p-2 text-base font-semibold hover:cursor-pointer hover:bg-green-400 hover:font-bold">
+                      <button
+                        onClick={() => {
+                          clearCart();
+                          closeModal();
+                        }}
+                      >
+                        Keep shopping
+                      </button>
                     </div>
                   </div>
                 </Dialog.Panel>

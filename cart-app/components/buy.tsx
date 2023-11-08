@@ -1,7 +1,7 @@
 // cart-app/pages/components/buy.tsx
 import { useContext, useState } from "react";
 import { CartContext } from "../contexts/CartContext";
-import Checkout from "./checkout";
+import Checkout from "./Checkout";
 
 export default function Buy() {
   const { cartItems, clearCart } = useContext(CartContext);

@@ -157,3 +157,47 @@ it("displays the correct error when the max amount of a product is surpassed ", 
     expect(errorModal).toBeInTheDocument();
   });
 });
+
+it("displays the checkout Modal ", async () => {
+  render(
+    <CartProvider>
+      <Home />
+    </CartProvider>,
+  );
+
+  // Select a product to enable the "Add to Cart" button and show price
+  const dropdownButton = screen.getByRole("button", {
+    name: /select a product/i,
+  });
+  userEvent.click(dropdownButton);
+  const firstProductButton = await screen.findByText(
+    mockProducts[0].productName,
+  );
+  userEvent.click(firstProductButton);
+
+  // Change the quantity using the slider to the max
+  const slider = (await screen.findByRole("slider")) as HTMLInputElement;
+  fireEvent.change(slider, {
+    target: { value: `${mockProducts[0].maxAmount}` },
+  });
+
+  // Add to cart
+  const addToCartButton = screen.getByRole("button", {
+    name: /add to cart/i,
+  });
+  userEvent.click(addToCartButton);
+
+  // Add to cart again , therefore surpassing max.
+
+  userEvent.click(addToCartButton);
+
+  const buyButton = screen.getByRole("button", {
+    name: /buy items/i,
+  });
+  userEvent.click(buyButton);
+
+  await waitFor(() => {
+    const checkoutModal = screen.getByText(`Checkout Confirmed!`);
+    expect(checkoutModal).toBeInTheDocument();
+  });
+});

@@ -53,7 +53,7 @@ export const ErrorModal = ({ isOpen, close, message }: ErrorModalProps) => {
           >
             &#8203;
           </span>
-          <div className="relative my-8 inline-block w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+          <div className="relative my-8 inline-block w-full max-w-md transform overflow-hidden  bg-white p-6 text-left align-middle shadow-xl transition-all">
             {/* Close Button */}
             <button
               onClick={close}
@@ -74,7 +74,7 @@ export const ErrorModal = ({ isOpen, close, message }: ErrorModalProps) => {
             {/* Progress bar */}
             <div className="mt-4 h-1.5 w-full rounded-full bg-gray-200">
               <div
-                className="h-1.5 rounded-full bg-red-200"
+                className="h-1.5 rounded-full bg-indigo-200"
                 style={{ width: `${progress}%` }}
               ></div>
             </div>

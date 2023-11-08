@@ -1,5 +1,5 @@
 import AddToCart from "../components/addToCart";
-import ProductTable from "../components/productTable";
+import ProductTable from "../components/ProductTable";
 import Buy from "../components/buy";
 
 export default function Home() {
